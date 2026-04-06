@@ -9,6 +9,7 @@ archive/
 *.csv
 *.zip
 *.tar.gz
+*.pkl
 
 # IDE and OS
 .vscode/
@@ -16,3 +17,4 @@ archive/
 __pycache__/
 *.py[cod]
 EOF
+
