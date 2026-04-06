@@ -1,0 +1,18 @@
+cat <<EOF > .gitignore
+# Environments
+.venv/
+venv/
+env/
+
+# Data and Archives
+archive/
+*.csv
+*.zip
+*.tar.gz
+
+# IDE and OS
+.vscode/
+.DS_Store
+__pycache__/
+*.py[cod]
+EOF
