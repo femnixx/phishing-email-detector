@@ -58,7 +58,11 @@ def feedback():
 
 @app.route('/admin')
 def admin():
-    test = 2
+    conn = sqlite3.connect('feedback.db')
+    rows = conn.execute('SELECT * FROM feedback').fetchall()
+    conn.close()
+    return render_template('admin.html', rows=rows)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
