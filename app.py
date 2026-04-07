@@ -15,7 +15,8 @@ def init_db():
                     email_text TEXT,
                     prediction TEXT,
                     was_correct BOOLEAN,
-                 timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+                    status TEXT DEFAULT 'pending',
+                    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
                  )
                  ''')
     conn.commit()
@@ -54,6 +55,10 @@ def feedback():
     conn.commit()
     conn.close()
     return jsonify({ 'status': 'ok' })
+
+@app.route('/admin')
+def admin():
+    test = 2
 
 if __name__ == '__main__':
     app.run(debug=True)
