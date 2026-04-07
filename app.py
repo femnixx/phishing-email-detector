@@ -63,6 +63,17 @@ def admin():
     conn.close()
     return render_template('admin.html', rows=rows)
 
+@app.route('/admin/decide', methods=['POST']):
+def decide():
+    data = request.get_json()
+    conn = sqlite3.connect('feedback.db')
+    conn.execute(
+        'UPDATE feedback SET status = ? WHERE id = ?',
+        data['action'], data['id']
+    )    
+    conn.commit()
+    conn.close()
+    return jsonify({ 'status': 'ok' })
 
 if __name__ == '__main__':
     app.run(debug=True)
