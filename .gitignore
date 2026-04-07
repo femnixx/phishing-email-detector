@@ -10,6 +10,7 @@ archive/
 *.zip
 *.tar.gz
 *.pkl
+*.db
 
 # IDE and OS
 .vscode/
