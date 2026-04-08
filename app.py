@@ -65,7 +65,7 @@ def admin():
     conn.close()
     return render_template('admin.html', rows=rows)
 
-@app.route('/admin/decide', methods=['POST'])
+@app.route('/admin/decide', methods=['GET'])
 def decide(): 
     conn = sqlite3.adapt('feedback.db')
     rows = conn.execute(
@@ -94,7 +94,7 @@ def retrain():
         else: 
             label = 0 if prediction == 'PHISHING' else 1
         texts.append(email_text)
-        labels.append(labels)
+        labels.append(label)
 
     new_vec = vectorizer.transform(texts)
     model.partial_fit(new_vec, labels)
