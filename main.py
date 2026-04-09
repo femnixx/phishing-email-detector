@@ -33,7 +33,7 @@ else:
     vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1, 2))
     X_train_vec = vectorizer.fit_transform(X_train)
     X_test_vec = vectorizer.transform(X_test)
-
+    
     model = MultinomialNB()
     model.fit(X_train_vec, y_train)
 
@@ -62,7 +62,7 @@ def check_email(my_text):
 
 # print("\n\n--- Email Check Test ---")
 # check_email("Hey, are we still meeting for coffee at 3pm?")
-check_email("URGENT: Your account has been locked. Click here to verify now!")
-check_email("Hey, this is the CEO. Your email is compromised. Follow this link to re-enter the database")
+# check_email("URGENT: Your account has been locked. Click here to verify now!")
+# check_email("Hey, this is the CEO. Your email is compromised. Follow this link to re-enter the database")
 
 # --------------------------------------------------------------------------------
