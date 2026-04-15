@@ -59,13 +59,12 @@ def feedback():
     data = request.get_json()
     conn = sqlite3.connect("feedback.db")
     conn.execute(
-        "INSERT INTO feedback (email_text, prediciton, was_correct) VALUES (?, ?, ?)",
+        "INSERT INTO feedback (email_text, prediction, was_correct) VALUES (?, ?, ?)",
         (data["text"], data["prediction"], data["was_correct"]),
     )
     conn.commit()
     conn.close()
     return jsonify({"status": "ok"})
-
 
 @app.route("/admin")
 def admin():
@@ -77,7 +76,7 @@ def admin():
 
 @app.route("/admin/decide", methods=["GET"])
 def decide():
-    conn = sqlite3.adapt("feedback.db")
+    conn = sqlite3.connect("feedback.db")
     rows = conn.execute('SELECT * FROM feedback where STATUS "pending"').fetchall()
     conn.close()
     return render_template("admin.html", rows=rows)

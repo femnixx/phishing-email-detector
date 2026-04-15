@@ -154,44 +154,44 @@
 
     <div id="retrainStatus" class="retrain-status"></div>
 
-    {% if rows %}
-        {% for row in rows %}
-        <div class="card status-{{ row[5] }}" id="card-{{ row[0] }}">
-            <div class="card-header">
-                <div class="email-content">
-                    <div class="email-text">{{ row[1] }}</div>
-                </div>
-                <div class="badges">
-                    <span class="badge {{ 'phishing' if row[2] == 'PHISHING' else 'safe' }}">
-                        {{ row[2] }}
-                    </span>
-                    <span class="badge" style="background: #e0f2fe; color: #0369a1;">
-                        {{ 'Verified' if row[3] else 'Flagged Error' }}
-                    </span>
-                </div>
-            </div>
+    {% for row in rows %}
+<div class="card status-{{ row[5] }}" id="card-{{ row[0] }}">
+    <div class="card-header">
+        <div class="email-content">
+            <div class="email-text">{{ row[1] }}</div>
+        </div>
+        <div class="badges">
+            <span class="badge {{ 'phishing' if row[2] == 'PHISHING' else 'safe' }}">
+                {{ row[2] }}
+            </span>
+            <span class="badge" style="background: #e0f2fe; color: #0369a1;">
+                {{ 'Verified' if row[3] else 'Flagged Error' }}
+            </span>
+        </div>
+    </div>
 
-            <div class="card-footer">
-                <div class="meta">ID: #{{ row[0] }} • {{ row[4] }}</div>
-                
-                <div class="action-buttons" id="actions-{{ row[0] }}">
-                    {% if row[5] == 'pending' %}
-                        <button class="btn-action btn-approve" onclick="decide('{{ row[0] }}', 'approve')">Approve</button>
-                        <button class="btn-action btn-reject" onclick="decide('{{ row[0] }}', 'reject')">Reject</button>
-                    {% else %}
-                        <span class="status-pill {{ row[5] }}">
-                            {{ row[5]|capitalize }}
-                        </span>
-                    {% endif %}
-                </div>
-            </div>
+    <div class="card-footer">
+        <div class="meta">ID: #{{ row[0] }} • {{ row[4] }}</div>
+        
+        <div class="action-buttons" id="actions-{{ row[0] }}">
+            {# Only show buttons if the status is 'pending' #}
+            {% if row[5] == 'pending' %}
+                <button class="btn-action btn-approve" onclick="decide('{{ row[0] }}', 'approve')">
+                    Check Approve
+                </button>
+                <button class="btn-action btn-reject" onclick="decide('{{ row[0] }}', 'reject')">
+                    ✖ Decline
+                </button>
+            {% else %}
+                {# If already decided, show the status pill instead of buttons #}
+                <span class="status-pill {{ row[5] }}">
+                    {{ row[5]|capitalize }}
+                </span>
+            {% endif %}
         </div>
-        {% endfor %}
-    {% else %}
-        <div class="empty-state">
-            <p>No submissions found in the database.</p>
-        </div>
-    {% endif %}
+    </div>
+</div>
+{% endfor %}
 </div>
 
 <script>
